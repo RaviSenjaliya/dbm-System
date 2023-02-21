@@ -1,4 +1,5 @@
 import { useTheme } from "@emotion/react";
+import axios from "axios";
 import { LoadingButton } from "@mui/lab";
 import { Card, Checkbox, Grid, TextField } from "@mui/material";
 import { Box, styled } from "@mui/system";
@@ -34,10 +35,13 @@ const JWTRegister = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
+  title: "",
+  firstName: "",
+  lastName: "",
   email: "",
   password: "",
-  username: "",
-  remember: true,
+  confirmPassword: "",
+  acceptTerms: true,
 };
 
 // form field validation schema
@@ -51,6 +55,16 @@ const validationSchema = Yup.object().shape({
 });
 
 const JwtRegister = () => {
+  const [Data, setData] = useState({
+    title: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    acceptTerms: true,
+  });
+
   const theme = useTheme();
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -60,13 +74,22 @@ const JwtRegister = () => {
     setLoading(true);
 
     try {
-      register(values.email, values.username, values.password);
-      navigate("/");
+      register(values.email, values.firstName, values.password);
       setLoading(false);
     } catch (e) {
       console.log(e);
       setLoading(false);
     }
+
+    axios
+      .post("http://localhost:4000/accounts/register", Data)
+      .then((e) => {
+        console.log(e.data);
+        alert("okkk");
+      })
+      .catch(() => {
+        alert("noooooooooooooooooooo");
+      });
   };
 
   return (
@@ -103,14 +126,14 @@ const JwtRegister = () => {
                       fullWidth
                       size="small"
                       type="text"
-                      name="username"
-                      label="Username"
+                      name="firstName"
+                      label="firstName"
                       variant="outlined"
                       onBlur={handleBlur}
-                      value={values.username}
+                      value={values.firstName}
                       onChange={handleChange}
-                      helperText={touched.username && errors.username}
-                      error={Boolean(errors.username && touched.username)}
+                      helperText={touched.firstName && errors.firstName}
+                      error={Boolean(errors.firstName && touched.firstName)}
                       sx={{ mb: 3 }}
                     />
 
@@ -146,9 +169,9 @@ const JwtRegister = () => {
                     <FlexBox gap={1} alignItems="center">
                       <Checkbox
                         size="small"
-                        name="remember"
+                        name="acceptTerms"
                         onChange={handleChange}
-                        checked={values.remember}
+                        checked={values.acceptTerms}
                         sx={{ padding: 0 }}
                       />
 

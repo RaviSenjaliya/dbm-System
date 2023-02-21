@@ -9,6 +9,8 @@
     "@mui/icons-material": "^5.1.1",
     "@mui/lab": "^5.0.0-alpha.55",
     "@mui/material": "^5.0.6",
+    "ag-grid-community": "^29.1.0",
+    "ag-grid-react": "^29.1.0",
     "autosuggest-highlight": "^3.2.0",
     "axios": "^0.24.0",
     "babel-polyfill": "^6.26.0",
