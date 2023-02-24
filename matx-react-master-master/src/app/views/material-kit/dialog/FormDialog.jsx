@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import BatchForm from "app/views/masters/BatchForm";
+import BatchForm from "app/views/masters/BatchComp/BatchForm";
 import React from "react";
 
 export default function FormDialog() {
@@ -22,7 +22,7 @@ export default function FormDialog() {
 
   return (
     <Box>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Open form dialog
       </Button>
 
@@ -37,7 +37,10 @@ export default function FormDialog() {
             To subscribe to this website, please enter your email address here.
             We will send updates occasionally.
           </DialogContentText>
+
+          {/* ======================*/}
           <BatchForm />
+          {/* ====================== */}
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" color="secondary" onClick={handleClose}>
